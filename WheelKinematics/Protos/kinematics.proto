@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option csharp_namespace = "WheelKinematics";
+
+package kinematics;
+
+// The KinematicsCalc definition
+service KinematicsCalc {
+  // Sends a greeting
+  rpc CalcDiffDrive (CmdVel) returns (DiffDrivePoses);
+}
+
+// The request of overall velocity of vehicle body
+message CmdVel {
+  double X = 1;
+  double Y = 2;
+  double Th = 3;
+}
+
+message WheelVel {
+  double Lin = 1;
+  double Ang = 2;
+}
+
+message RobotPose {
+  double X = 1;
+  double Y = 2;
+  double Th = 3;
+}
+
+// The response message containing the corresponding wheel kinematics
+message DiffDrivePoses {
+  WheelVel Left = 1;
+  WheelVel Right = 2;
+  
+  RobotPose Robot = 3;
+}
+
+// message AckermannPoses {
+//   WheelPose FrontLeft = 1;
+//   WheelPose FrontRight = 2;
+//   WheelPose RearLeft = 3;
+//   WheelPose RearRight = 4;
+// }
